@@ -1,0 +1,24 @@
+GuardianEye AI
+Copyright 2026 GuardianEye AI Contributors
+
+This product includes software developed as part of GuardianEye AI
+(https://github.com/childscreentime/cst fork and enhancements)
+for the Hacktoberfest Islamabad 2026 Open AI Build Challenge.
+
+========================================================================
+Upstream Base Attribution:
+========================================================================
+This project forks and enhances the open-source Android parental control
+application "Child Screen Time" (childscreentime/cst), originally licensed
+under open-source terms.
+
+Modifications and extensions in GuardianEye AI:
+- 20-20-35 Ophthalmology Rule Engine (EyeCareManager & unskippable overlay)
+- 1.5-Hour Daily Entertainment Cap with hard lock enforcer
+- Open-Weight AI Study Companion (Llama-3.1-8B-Instant) with diary parsing
+- Educational Exemption Manager (pausing entertainment counter during study)
+- Anti-Cheat & Anti-Idling Inactivity Monitor
+- Pocket Money Consequence Engine (next-day financial accountability)
+- Real-time cross-device REST & Server-Sent Events (SSE) telemetry deck
+- 7 aesthetic responsive themes (Cyber Cyan, Emerald Matrix, Tokyo Sunset,
+  Solar Amber, Nordic Frost, Dracula Crimson, Deep Amethyst)

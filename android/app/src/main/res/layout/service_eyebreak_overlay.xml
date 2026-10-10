@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0F1D"
+    android:padding="24dp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Eye Icon / Symbol -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👁️"
+            android:textSize="64sp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20-20-35 EYE STRAIN BREAK"
+            android:textColor="#38BDF8"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Protect Your Eyesight"
+            android:textColor="#94A3B8"
+            android:textSize="15sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Circular Countdown Timer Area -->
+        <FrameLayout
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="24dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#1E293B" />
+
+            <TextView
+                android:id="@+id/tv_eyebreak_countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="35s"
+                android:textColor="#38BDF8"
+                android:textSize="44sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <!-- Doctor / Guidance Instructions -->
+        <TextView
+            android:id="@+id/tv_eyebreak_guidance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Look at an object at least 20 feet (6 meters) away to relax your ciliary eye muscles."
+            android:textColor="#F1F5F9"
+            android:textSize="17sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This screen will unlock automatically when the 35 seconds expire."
+            android:textColor="#64748B"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</RelativeLayout>

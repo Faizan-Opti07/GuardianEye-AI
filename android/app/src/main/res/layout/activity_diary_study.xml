@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0F172A"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="GuardianEye AI Study Hub"
+            android:textColor="#38BDF8"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_study_exemption_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#065F46"
+            android:textColor="#34D399"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:textSize="12sp"
+            android:text="🛡️ Timer Paused (Study Mode)" />
+    </LinearLayout>
+
+    <!-- Work Diary Submission Card -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#1E293B"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daily School Diary &amp; Homework"
+            android:textColor="#E2E8F0"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <EditText
+            android:id="@+id/et_diary_input"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#0F172A"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#64748B"
+            android:gravity="top|start"
+            android:padding="8dp"
+            android:textSize="13sp"
+            android:hint="Type or paste today's homework (e.g. Math Ex 4.2; Science Plant Cell; English essay)..." />
+
+        <Button
+            android:id="@+id/btn_generate_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#0284C7"
+            android:textColor="#FFFFFF"
+            android:text="🤖 Submit to AI &amp; Generate 2-Hour Plan" />
+    </LinearLayout>
+
+    <!-- Chat / Educational Tutor Area -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Strict Socratic Educational Tutor"
+        android:textColor="#94A3B8"
+        android:textSize="13sp"
+        android:layout_marginBottom="6dp" />
+
+    <FrameLayout
+        android:id="@+id/chat_history_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#1E293B"
+        android:padding="8dp" />
+
+    <!-- Chat Input Field -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/et_tutor_query"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="#1E293B"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#64748B"
+            android:paddingHorizontal="12dp"
+            android:textSize="14sp"
+            android:hint="Ask homework question (strictly educational)..." />
+
+        <Button
+            android:id="@+id/btn_send_tutor"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#0284C7"
+            android:textColor="#FFFFFF"
+            android:text="Ask" />
+    </LinearLayout>
+</LinearLayout>
