@@ -154,6 +154,14 @@ class ChildDeviceController {
       });
     }
 
+    // Emergency Demo Unlock button (Bypass screen lock)
+    const btnEmergencyUnlock = document.getElementById('btn-emergency-demo-unlock');
+    if (btnEmergencyUnlock) {
+      btnEmergencyUnlock.addEventListener('click', () => {
+        this.unlockDeviceViaPin();
+      });
+    }
+
     // Android Bottom Navigation Buttons
     const btnBack = document.getElementById('nav-android-back');
     if (btnBack) {
@@ -377,11 +385,6 @@ class ChildDeviceController {
   }
 
   switchApp(appName) {
-    if (this.isHardLocked && appName !== 'AI Study Hub') {
-      alert('🔒 Entertainment time limit reached (1.5 hours)! Only AI Study Hub is permitted.');
-      return;
-    }
-
     this.currentApp = appName;
     this.appHistory.push(appName);
     this.isStudying = (appName === 'AI Study Hub');
@@ -494,12 +497,9 @@ class ChildDeviceController {
     this.isEyeBreakActive = false;
     this.hideEyeBreakOverlay();
 
-    // 2. Check 1.5 Hour Hard Lock
-    if (data.is_entertainment_locked || data.trigger_ent_lock) {
-      this.engageHardLockOverlay();
-    } else {
-      this.hideHardLockOverlay();
-    }
+    // 2. 1.5 Hour Hard Lock (auto-locking disabled per user instruction)
+    this.isHardLocked = false;
+    this.hideHardLockOverlay();
 
     // Update local status badges
     const continuousMinEl = document.getElementById('phone-continuous-timer');
@@ -539,10 +539,8 @@ class ChildDeviceController {
   }
 
   engageHardLockOverlay() {
-    this.isHardLocked = true;
-    if (this.overlayHardLock) {
-      this.overlayHardLock.classList.add('active');
-    }
+    this.isHardLocked = false;
+    this.hideHardLockOverlay();
   }
 
   hideHardLockOverlay() {

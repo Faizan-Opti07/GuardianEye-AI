@@ -252,20 +252,10 @@ class GuardianHandler(BaseHTTPRequestHandler):
                 if current_app not in ["Home", "Settings", "Educational Hub"]:
                     ent_sec += delta_sec
                     
-            # 1.5 hours = 90 minutes = 5400 seconds (or 90 seconds in demo mode)
-            ent_cap_threshold = 5400
-            if data.get("demo_mode", False):
-                ent_cap_threshold = 90
-                
+            # 1.5 hours entertainment cap tracking
+            # NOTE: Automatic entertainment screen lockout is DISABLED per user request so child simulator apps remain fully playable
             trigger_ent_lock_now = False
-            if ent_sec >= ent_cap_threshold and not is_ent_locked:
-                is_ent_locked = True
-                trigger_ent_lock_now = True
-                # Log violation for pocket money penalty
-                cursor.execute("""
-                    INSERT INTO violations (violation_type, severity, details, deduction_amount)
-                    VALUES ('entertainment_overtime', 'critical', 'Exceeded 1.5 Hours Daily Entertainment Cap', 25.0)
-                """)
+            is_ent_locked = False
 
             cursor.execute("""
                 UPDATE daily_sessions
@@ -402,7 +392,7 @@ class GuardianHandler(BaseHTTPRequestHandler):
                 cursor.execute("UPDATE daily_sessions SET is_entertainment_locked = 1 WHERE session_date = ?", (today_str,))
                 msg = "Father initiated remote emergency device lockout."
             elif action == "unlock":
-                cursor.execute("UPDATE daily_sessions SET is_entertainment_locked = 0, is_eye_break_active = 0, continuous_screen_seconds = 0 WHERE session_date = ?", (today_str,))
+                cursor.execute("UPDATE daily_sessions SET is_entertainment_locked = 0, entertainment_seconds = 0, is_eye_break_active = 0, continuous_screen_seconds = 0 WHERE session_date = ?", (today_str,))
                 msg = "Father remotely unlocked child device."
             elif action == "trigger_eye_break":
                 cursor.execute("UPDATE daily_sessions SET is_eye_break_active = 1, continuous_screen_seconds = 1200 WHERE session_date = ?", (today_str,))
