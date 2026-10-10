@@ -28,3 +28,4 @@ app/build/
 local.properties
 *.apk
 *.aab
+*.db
