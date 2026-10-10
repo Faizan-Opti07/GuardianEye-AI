@@ -234,24 +234,13 @@ class GuardianHandler(BaseHTTPRequestHandler):
             is_ent_locked = bool(row["is_entertainment_locked"])
             is_eye_locked = bool(row["is_eye_break_active"])
 
-            # 1. Update continuous screen time for 20-20-35 rule
-            continuous_sec += delta_sec
+            # 1. Update continuous screen time tracking
+            # Continuous screen time is tracked for analytics, but automatic 35-sec screen lock is DISABLED per user request
+            if not is_ent_locked:
+                continuous_sec += delta_sec
             
-            # 20 minutes = 1200 seconds. For interactive demo acceleration,
-            # allow clients to signal accelerated demo mode (e.g., demo speed 60x: 20 seconds = 20 mins)
-            eye_break_threshold = 1200
-            if data.get("demo_mode", False):
-                eye_break_threshold = 20  # 20 seconds triggers 35-second eye break in demo mode!
-
             trigger_eye_break_now = False
-            if continuous_sec >= eye_break_threshold and not is_eye_locked:
-                is_eye_locked = True
-                trigger_eye_break_now = True
-                breaks_taken += 1
-                cursor.execute("""
-                    INSERT INTO telemetry_logs (event_type, app_name, message)
-                    VALUES ('eye_break_triggered', ?, '20-Minute Continuous Usage Reached. 35-Second Eye Break Overlay Engaged!')
-                """, (current_app,))
+            is_eye_locked = False
 
             # 2. Check study exemption vs entertainment counter
             if is_studying:
@@ -413,7 +402,7 @@ class GuardianHandler(BaseHTTPRequestHandler):
                 cursor.execute("UPDATE daily_sessions SET is_entertainment_locked = 1 WHERE session_date = ?", (today_str,))
                 msg = "Father initiated remote emergency device lockout."
             elif action == "unlock":
-                cursor.execute("UPDATE daily_sessions SET is_entertainment_locked = 0, is_eye_break_active = 0 WHERE session_date = ?", (today_str,))
+                cursor.execute("UPDATE daily_sessions SET is_entertainment_locked = 0, is_eye_break_active = 0, continuous_screen_seconds = 0 WHERE session_date = ?", (today_str,))
                 msg = "Father remotely unlocked child device."
             elif action == "trigger_eye_break":
                 cursor.execute("UPDATE daily_sessions SET is_eye_break_active = 1, continuous_screen_seconds = 1200 WHERE session_date = ?", (today_str,))
